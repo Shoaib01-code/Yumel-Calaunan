@@ -3,422 +3,399 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dr. Ledjona Thaci | Aesthetic Practitioner · London</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Yumel Calaunan — Chemistry & Math Tutoring</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: 'Jost', sans-serif;
-    background: #0a0a0a;
-    color: #f0ece4;
-    overflow-x: hidden;
+  :root{
+    --paper:#EEF0E6;
+    --paper-2:#E4E7D8;
+    --ink:#16221F;
+    --ink-soft:#3E4A44;
+    --flask:#2B6E5B;
+    --flask-deep:#1D4E40;
+    --flame:#E4703C;
+    --highlight:#F2C14E;
+    --line:rgba(22,34,31,0.14);
+    --radius:2px;
   }
 
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 1.2rem 4rem;
-    background: rgba(10,10,10,0.88);
-    backdrop-filter: blur(14px);
-    border-bottom: 0.5px solid rgba(200,180,140,0.15);
-  }
-  .logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.2rem; letter-spacing: 0.12em;
-    color: #c8b48a; font-weight: 400;
-  }
-  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-  .nav-links a {
-    color: rgba(240,236,228,0.6);
-    font-size: 0.78rem; letter-spacing: 0.1em;
-    text-transform: uppercase; text-decoration: none;
-    transition: color 0.3s;
-  }
-  .nav-links a:hover { color: #c8b48a; }
-  .nav-btn {
-    background: transparent; border: 0.5px solid #c8b48a;
-    color: #c8b48a; padding: 0.5rem 1.4rem;
-    font-family: 'Jost', sans-serif; font-size: 0.78rem;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    cursor: pointer; transition: all 0.3s;
-  }
-  .nav-btn:hover { background: #c8b48a; color: #0a0a0a; }
-
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: flex; align-items: center;
-    padding: 8rem 4rem 4rem;
-    position: relative; overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute; top: 0; right: 0;
-    width: 55%; height: 100%;
-    background: linear-gradient(135deg, #1a1408 0%, #0d0d0d 60%);
-    clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
-  }
-  .hero-accent {
-    position: absolute; right: 6rem; top: 50%; transform: translateY(-50%);
-    width: 340px; height: 460px;
-    border: 0.5px solid rgba(200,180,140,0.25);
-    border-radius: 2px;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .hero-accent-inner {
-    width: 90%; height: 90%;
-    background: linear-gradient(160deg, #1c1508, #0f0f0f);
-    border-radius: 1px;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    border: 0.5px solid rgba(200,180,140,0.1);
-  }
-  .avatar-circle {
-    width: 120px; height: 120px; border-radius: 50%;
-    background: linear-gradient(135deg, #2a1f08, #1a1408);
-    border: 1px solid rgba(200,180,140,0.4);
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.8rem; font-weight: 300; color: #c8b48a;
-    margin-bottom: 1.5rem;
-  }
-  .card-name { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: #f0ece4; font-weight: 400; margin-bottom: 0.3rem; }
-  .card-title { font-size: 0.72rem; letter-spacing: 0.12em; color: #c8b48a; text-transform: uppercase; }
-  .card-divider { width: 40px; height: 0.5px; background: rgba(200,180,140,0.4); margin: 1.2rem auto; }
-  .card-location { font-size: 0.75rem; color: rgba(240,236,228,0.45); letter-spacing: 0.06em; }
-
-  .hero-content { position: relative; z-index: 2; max-width: 52%; }
-  .hero-tag {
-    font-size: 0.72rem; letter-spacing: 0.18em;
-    text-transform: uppercase; color: #c8b48a;
-    margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem;
-  }
-  .hero-tag::before { content: ''; display: inline-block; width: 30px; height: 0.5px; background: #c8b48a; }
-  h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(3rem, 5vw, 4.8rem);
-    font-weight: 300; line-height: 1.08;
-    color: #f0ece4; margin-bottom: 1.6rem;
-  }
-  h1 em { color: #c8b48a; font-style: normal; }
-  .hero-desc {
-    font-size: 0.92rem; line-height: 1.8;
-    color: rgba(240,236,228,0.6);
-    max-width: 440px; margin-bottom: 2.5rem; font-weight: 300;
-  }
-  .hero-btns { display: flex; gap: 1rem; align-items: center; }
-  .btn-primary {
-    background: #c8b48a; color: #0a0a0a;
-    padding: 0.85rem 2rem;
-    font-family: 'Jost', sans-serif; font-size: 0.78rem;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    cursor: pointer; border: none; transition: all 0.3s;
-  }
-  .btn-primary:hover { background: #d4c49e; }
-  .btn-outline {
-    background: transparent; border: 0.5px solid rgba(200,180,140,0.4);
-    color: #c8b48a; padding: 0.85rem 2rem;
-    font-family: 'Jost', sans-serif; font-size: 0.78rem;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    cursor: pointer; transition: all 0.3s;
-  }
-  .btn-outline:hover { border-color: #c8b48a; }
-
-  /* STATS BAR */
-  .stats-bar {
-    background: #111;
-    border-top: 0.5px solid rgba(200,180,140,0.12);
-    border-bottom: 0.5px solid rgba(200,180,140,0.12);
-    display: flex; justify-content: center;
-  }
-  .stat {
-    padding: 2rem 3rem; text-align: center;
-    border-right: 0.5px solid rgba(200,180,140,0.12);
-    flex: 1; max-width: 220px;
-  }
-  .stat:last-child { border-right: none; }
-  .stat-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.2rem; font-weight: 300; color: #c8b48a; line-height: 1;
-  }
-  .stat-label { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(240,236,228,0.4); margin-top: 0.4rem; }
-
-  /* SECTIONS */
-  section { padding: 6rem 4rem; }
-  .section-tag {
-    font-size: 0.68rem; letter-spacing: 0.18em;
-    text-transform: uppercase; color: #c8b48a;
-    margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.8rem;
-  }
-  .section-tag::before { content: ''; display: inline-block; width: 20px; height: 0.5px; background: #c8b48a; }
-  h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2rem, 3.5vw, 3rem);
-    font-weight: 300; color: #f0ece4; margin-bottom: 1rem;
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Source Serif 4', serif;
+    line-height:1.6;
+    overflow-x:hidden;
   }
 
-  /* SERVICES */
-  .services { background: #0d0d0d; }
-  .services-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 1px; background: rgba(200,180,140,0.1); margin-top: 3rem;
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
   }
-  .service-card {
-    background: #0d0d0d; padding: 2.2rem;
-    transition: background 0.3s; position: relative; overflow: hidden;
-  }
-  .service-card::after {
-    content: ''; position: absolute; bottom: 0; left: 0;
-    width: 0; height: 0.5px; background: #c8b48a; transition: width 0.4s;
-  }
-  .service-card:hover::after { width: 100%; }
-  .service-card:hover { background: #121208; }
-  .service-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.5rem; font-weight: 300;
-    color: rgba(200,180,140,0.15); line-height: 1; margin-bottom: 1rem;
-  }
-  .service-title { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; color: #f0ece4; margin-bottom: 0.8rem; font-weight: 400; }
-  .service-desc { font-size: 0.82rem; line-height: 1.7; color: rgba(240,236,228,0.45); font-weight: 300; }
 
-  /* EXPERIENCE */
-  .experience { background: #0a0a0a; display: flex; gap: 5rem; align-items: flex-start; }
-  .exp-left { flex: 1; }
-  .exp-right { flex: 1.4; }
-  .exp-intro { font-size: 0.9rem; line-height: 1.8; color: rgba(240,236,228,0.55); font-weight: 300; margin-top: 1.5rem; max-width: 380px; }
-  .timeline { margin-top: 2rem; }
-  .timeline-item { display: flex; gap: 1.5rem; margin-bottom: 2rem; position: relative; }
-  .timeline-item::before {
-    content: ''; position: absolute; left: 5.5px; top: 26px; bottom: -2rem;
-    width: 0.5px; background: rgba(200,180,140,0.15);
+  .display{font-family:'Space Grotesk', sans-serif;}
+  .mono{font-family:'IBM Plex Mono', monospace;}
+
+  a{color:inherit;}
+  :focus-visible{outline:2px solid var(--flame); outline-offset:3px;}
+
+  /* ---------- ambient beaker bubbles ---------- */
+  .bubbles{position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden;}
+  .bubble{
+    position:absolute; bottom:-40px; border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, rgba(43,110,91,0.16), rgba(43,110,91,0.03));
+    animation:rise linear infinite;
   }
-  .timeline-item:last-child::before { display: none; }
-  .tl-dot { width: 11px; height: 11px; border: 0.5px solid #c8b48a; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
-  .tl-period { font-size: 0.68rem; letter-spacing: 0.1em; color: #c8b48a; text-transform: uppercase; margin-bottom: 0.25rem; }
-  .tl-role { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: #f0ece4; font-weight: 400; }
-  .tl-place { font-size: 0.78rem; color: rgba(240,236,228,0.4); margin-top: 0.15rem; }
-
-  /* CERTIFICATIONS */
-  .certs { background: #0d0d0d; }
-  .cert-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
-  .cert-card { border: 0.5px solid rgba(200,180,140,0.15); padding: 1.8rem; transition: border-color 0.3s; }
-  .cert-card:hover { border-color: rgba(200,180,140,0.5); }
-  .cert-icon { font-size: 1.4rem; margin-bottom: 1rem; color: #c8b48a; font-family: 'Cormorant Garamond', serif; }
-  .cert-name { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; color: #f0ece4; margin-bottom: 0.4rem; }
-  .cert-issuer { font-size: 0.72rem; color: rgba(240,236,228,0.4); letter-spacing: 0.06em; text-transform: uppercase; }
-  .cert-date { font-size: 0.68rem; color: #c8b48a; margin-top: 0.6rem; }
-
-  /* CONTACT */
-  .contact { background: #0a0a0a; text-align: center; }
-  .contact-sub { font-size: 0.9rem; line-height: 1.8; color: rgba(240,236,228,0.5); max-width: 420px; margin: 1rem auto 2.5rem; font-weight: 300; }
-  .contact-email { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: #c8b48a; margin-bottom: 2rem; }
-  .contact-location { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(240,236,228,0.3); margin-top: 2rem; }
-
-  /* FOOTER */
-  footer {
-    padding: 1.5rem 4rem;
-    border-top: 0.5px solid rgba(200,180,140,0.1);
-    display: flex; justify-content: space-between; align-items: center;
+  @keyframes rise{
+    0%{transform:translateY(0) translateX(0); opacity:0;}
+    8%{opacity:1;}
+    100%{transform:translateY(-115vh) translateX(20px); opacity:0;}
   }
-  .footer-name { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; color: rgba(240,236,228,0.35); }
-  .footer-copy { font-size: 0.7rem; color: rgba(240,236,228,0.2); letter-spacing: 0.08em; }
 
-  /* RESPONSIVE */
-  @media (max-width: 900px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { display: none; }
-    .hero { padding: 7rem 1.5rem 3rem; flex-direction: column; }
-    .hero::before { display: none; }
-    .hero-content { max-width: 100%; }
-    .hero-accent { position: static; transform: none; width: 100%; height: auto; margin-top: 2.5rem; }
-    .hero-accent-inner { padding: 2rem; }
-    .stats-bar { flex-wrap: wrap; }
-    .stat { max-width: 50%; border-bottom: 0.5px solid rgba(200,180,140,0.12); }
-    section { padding: 4rem 1.5rem; }
-    .services-grid { grid-template-columns: 1fr; }
-    .experience { flex-direction: column; gap: 2rem; }
-    .cert-grid { grid-template-columns: 1fr; }
-    footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+  .wrap{max-width:1080px; margin:0 auto; padding:0 32px; position:relative; z-index:1;}
+
+  /* ---------- nav ---------- */
+  nav{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:28px 32px; max-width:1080px; margin:0 auto; position:relative; z-index:2;
   }
+  .nav-mark{font-family:'Space Grotesk', sans-serif; font-weight:700; letter-spacing:0.04em; font-size:15px;}
+  .nav-mark span{color:var(--flask);}
+  nav .links{display:flex; gap:28px; font-family:'Space Grotesk',sans-serif; font-size:14px; font-weight:500;}
+  nav .links a{text-decoration:none; opacity:0.75; transition:opacity .2s;}
+  nav .links a:hover{opacity:1;}
+  .links{display:flex;}
+  @media (max-width:640px){ nav .links{display:none;} }
+
+  /* ---------- hero ---------- */
+  .hero{
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:56px; align-items:center;
+    padding:56px 0 88px; position:relative; z-index:1;
+  }
+  @media (max-width:860px){ .hero{grid-template-columns:1fr; padding-top:24px;} }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size:12.5px; letter-spacing:0.14em;
+    text-transform:uppercase; color:var(--flask-deep); display:flex; align-items:center; gap:10px;
+    opacity:0; animation:fadeUp .7s ease forwards .1s;
+  }
+  .eyebrow::before{content:''; width:22px; height:1px; background:var(--flame);}
+
+  h1{
+    font-family:'Space Grotesk', sans-serif; font-weight:600; font-size:clamp(38px,5vw,58px);
+    line-height:1.05; margin:18px 0 20px; letter-spacing:-0.01em;
+    opacity:0; animation:fadeUp .7s ease forwards .25s;
+  }
+  h1 em{font-style:normal; color:var(--flask);}
+
+  .hero p.sub{
+    font-size:18px; color:var(--ink-soft); max-width:46ch; margin:0 0 32px;
+    opacity:0; animation:fadeUp .7s ease forwards .4s;
+  }
+
+  .cta-row{display:flex; gap:16px; flex-wrap:wrap; opacity:0; animation:fadeUp .7s ease forwards .55s;}
+  .btn{
+    font-family:'Space Grotesk', sans-serif; font-weight:600; font-size:14.5px;
+    padding:14px 26px; border-radius:var(--radius); text-decoration:none;
+    display:inline-flex; align-items:center; gap:8px; transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .btn-primary{background:var(--flask); color:#F4F6EF; box-shadow:4px 4px 0 var(--flask-deep);}
+  .btn-primary:hover{transform:translate(-2px,-2px); box-shadow:6px 6px 0 var(--flask-deep);}
+  .btn-ghost{border:1.5px solid var(--ink); color:var(--ink);}
+  .btn-ghost:hover{background:var(--ink); color:var(--paper);}
+
+  @keyframes fadeUp{ from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);} }
+
+  /* ---------- element tile (signature) ---------- */
+  .tile-stage{display:flex; justify-content:center; opacity:0; animation:fadeUp .8s ease forwards .3s;}
+  .tile{
+    width:260px; height:300px; background:var(--flask); color:#EFF3E9;
+    border-radius:6px; position:relative; padding:20px;
+    box-shadow:10px 10px 0 var(--paper-2), 10px 10px 0 1px var(--line);
+    transform:rotate(-2deg);
+    transition:transform .4s ease;
+  }
+  .tile:hover{transform:rotate(0deg) scale(1.02);}
+  .tile .num{font-family:'IBM Plex Mono',monospace; font-size:14px; opacity:0.8;}
+  .tile .symbol{
+    font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:76px; text-align:center;
+    margin-top:10px; letter-spacing:-0.02em;
+  }
+  .tile .name{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15px; text-align:center; margin-top:6px;}
+  .tile .mass{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; text-align:center; margin-top:4px; opacity:0.85;
+  }
+  .tile::after{
+    content:''; position:absolute; inset:8px; border:1px solid rgba(239,243,233,0.25); border-radius:3px; pointer-events:none;
+  }
+  .tile .drip{
+    position:absolute; width:6px; height:6px; border-radius:50%; background:var(--highlight);
+    bottom:-6px; left:50%; animation:drip 2.6s ease-in infinite;
+  }
+  @keyframes drip{
+    0%{transform:translate(-50%,0) scale(1); opacity:1;}
+    70%{opacity:1;}
+    100%{transform:translate(-50%,220px) scale(0.6); opacity:0;}
+  }
+
+  /* ---------- section shell ---------- */
+  section{padding:72px 0; position:relative; z-index:1;}
+  .section-head{margin-bottom:44px;}
+  .section-tag{
+    font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--flame); margin-bottom:10px;
+  }
+  h2{font-family:'Space Grotesk',sans-serif; font-size:clamp(26px,3.4vw,36px); font-weight:600; margin:0; letter-spacing:-0.01em;}
+
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ---------- about ---------- */
+  .about-grid{display:grid; grid-template-columns:0.9fr 1.1fr; gap:48px; align-items:start;}
+  @media (max-width:800px){.about-grid{grid-template-columns:1fr;}}
+  .about-grid p{font-size:16.5px; color:var(--ink-soft); margin:0 0 16px;}
+  .stat-card{
+    background:var(--paper-2); border:1px solid var(--line); border-radius:4px; padding:22px;
+    display:grid; grid-template-columns:1fr 1fr; gap:20px;
+  }
+  .stat b{display:block; font-family:'Space Grotesk',sans-serif; font-size:28px; color:var(--flask-deep);}
+  .stat span{font-size:12.5px; font-family:'IBM Plex Mono',monospace; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.05em;}
+
+  /* ---------- timeline (lab notebook) ---------- */
+  .notebook{
+    border-left:2px solid var(--line); padding-left:32px; position:relative;
+  }
+  .entry{margin-bottom:38px; position:relative;}
+  .entry:last-child{margin-bottom:0;}
+  .entry::before{
+    content:''; position:absolute; left:-38px; top:6px; width:11px; height:11px; border-radius:50%;
+    background:var(--paper); border:2.5px solid var(--flask);
+  }
+  .entry .date{font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--flame); letter-spacing:0.03em;}
+  .entry h3{font-family:'Space Grotesk',sans-serif; font-size:19px; margin:6px 0 4px; font-weight:600;}
+  .entry .place{font-size:13.5px; color:var(--ink-soft); margin-bottom:8px; font-style:italic;}
+  .entry p{font-size:15px; color:var(--ink-soft); margin:0; max-width:62ch;}
+
+  /* ---------- services ---------- */
+  .services{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  @media (max-width:800px){.services{grid-template-columns:1fr;}}
+  .service{
+    background:var(--paper); border:1.5px solid var(--ink); border-radius:3px; padding:26px;
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .service:hover{transform:translateY(-6px); box-shadow:6px 6px 0 var(--flask);}
+  .service .icon{
+    width:38px; height:38px; border-radius:50%; background:var(--flask); margin-bottom:16px;
+    display:flex; align-items:center; justify-content:center; color:#fff; font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:600;
+  }
+  .service h3{font-family:'Space Grotesk',sans-serif; font-size:17px; margin:0 0 8px;}
+  .service p{font-size:14.5px; color:var(--ink-soft); margin:0;}
+
+  /* ---------- reagents / skills ---------- */
+  .reagents{display:flex; flex-wrap:wrap; gap:10px;}
+  .tag{
+    font-family:'IBM Plex Mono',monospace; font-size:12.5px; padding:8px 14px; border-radius:20px;
+    border:1px solid var(--line); background:var(--paper-2); color:var(--ink-soft);
+    transition:background .2s ease, color .2s ease, border-color .2s ease;
+  }
+  .tag:hover{background:var(--flask); color:#fff; border-color:var(--flask);}
+
+  /* ---------- contact ---------- */
+  .contact{
+    background:var(--ink); color:var(--paper); border-radius:6px; padding:56px 44px;
+    display:grid; grid-template-columns:1.2fr 0.8fr; gap:32px; align-items:center; position:relative; overflow:hidden;
+  }
+  @media (max-width:800px){.contact{grid-template-columns:1fr; padding:40px 26px;}}
+  .contact h2{color:var(--paper);}
+  .contact p{color:#C7D0C5; max-width:46ch; margin:14px 0 0; font-size:15.5px;}
+  .contact .btn-primary{background:var(--flame); box-shadow:4px 4px 0 #a8461f;}
+  .contact .btn-primary:hover{box-shadow:6px 6px 0 #a8461f;}
+  .contact-actions{display:flex; flex-direction:column; gap:14px; align-items:flex-start;}
+  .contact::after{
+    content:''; position:absolute; right:-60px; top:-60px; width:220px; height:220px; border-radius:50%;
+    border:1px solid rgba(244,246,239,0.12);
+  }
+
+  footer{padding:32px 0 48px; text-align:center; font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--ink-soft);}
 </style>
 </head>
 <body>
 
-<!-- NAVIGATION -->
+<div class="bubbles" id="bubbles"></div>
+
 <nav>
-  <div class="logo">Dr. Ledjona Thaci</div>
-  <ul class="nav-links">
-    <li><a href="#services">Services</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#certifications">Credentials</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <button class="nav-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book Consultation</button>
+  <a class="nav-mark" href="https://www.linkedin.com/in/yumel-calaunan/" target="_blank" rel="noopener" style="text-decoration:none;">YUMEL <span>CALAUNAN</span></a>
+  <div class="links">
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#services">Tutoring</a>
+    <a href="#contact">Contact</a>
+  </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero" id="home">
-  <div class="hero-content">
-    <div class="hero-tag">Medical Doctor · MD</div>
-    <h1>Precision in<br><em>Facial</em><br>Aesthetics</h1>
-    <p class="hero-desc">Internationally trained medical doctor specialising in facial sculpting and aesthetic medicine, bringing clinical excellence from London, New York, and Tirana.</p>
-    <div class="hero-btns">
-      <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book Appointment</button>
-      <button class="btn-outline" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">View Services</button>
+<div class="wrap">
+  <section class="hero">
+    <div>
+      <div class="eyebrow">BS Chemistry · Los Angeles Metro Area</div>
+      <h1>Chemistry stops being<br><em>confusing</em> here.</h1>
+      <p class="sub">I'm Yumel — a chemistry graduate and former Supplemental Instruction Leader who spent three years turning General &amp; Organic Chemistry from "impossible" into "got it." Now I tutor students one-on-one, the same way.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#contact">Book a session</a>
+        <a class="btn btn-ghost" href="#experience">See my background</a>
+      </div>
     </div>
-  </div>
-  <div class="hero-accent">
-    <div class="hero-accent-inner">
-      <div class="avatar-circle">LT</div>
-      <div class="card-name">Dr. Ledjona Thaci</div>
-      <div class="card-title">Aesthetic Practitioner</div>
-      <div class="card-divider"></div>
-      <div class="card-location">South Kensington, London 🇬🇧</div>
+    <div class="tile-stage">
+      <div class="tile">
+        <div class="num">Yc</div>
+        <div class="symbol">Yc</div>
+        <div class="name">Yumel Calaunan</div>
+        <div class="mass">2.10 yrs teaching experience</div>
+        <div class="drip"></div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- STATS BAR -->
-<div class="stats-bar">
-  <div class="stat"><div class="stat-num">5+</div><div class="stat-label">Years Experience</div></div>
-  <div class="stat"><div class="stat-num">3</div><div class="stat-label">Countries Trained</div></div>
-  <div class="stat"><div class="stat-num">MD</div><div class="stat-label">Medical Degree</div></div>
-  <div class="stat"><div class="stat-num">NHS</div><div class="stat-label">UK Qualified</div></div>
+  <section id="about">
+    <div class="section-head reveal">
+      <div class="section-tag">// 01 About</div>
+      <h2>From the lab bench to the whiteboard</h2>
+    </div>
+    <div class="about-grid reveal">
+      <div>
+        <p>I graduated with a BS in Chemistry from McMurry University, where I spent two years as a Supplemental Instruction Leader and tutor — running sessions, office hours, and exam prep for General and Organic Chemistry students of every major.</p>
+        <p>Alongside teaching, I worked as an undergraduate researcher in organic and inorganic synthesis, running instruments like FTIR, GCMS, and NMR. That lab experience is exactly what I bring into tutoring: I don't just explain the concept, I show you why it works.</p>
+      </div>
+      <div class="stat-card">
+        <div class="stat"><b>2 yrs 10 mo</b><span>Tutoring &amp; SI leadership</span></div>
+        <div class="stat"><b>3 mo</b><span>Undergrad research internship</span></div>
+        <div class="stat"><b>4</b><span>Instruments mastered</span></div>
+        <div class="stat"><b>2</b><span>Subjects: Gen &amp; Organic Chem</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="section-head reveal">
+      <div class="section-tag">// 02 Lab Notebook</div>
+      <h2>Where the experience comes from</h2>
+    </div>
+    <div class="notebook reveal">
+      <div class="entry">
+        <div class="date">JAN 2024 — MAY 2026</div>
+        <h3>Supplemental Instruction Leader</h3>
+        <div class="place">McMurry University · Abilene, TX · Part-time</div>
+        <p>Planned and led SI sessions in General and Organic Chemistry for students across majors and class levels, plus office hours for homework and exam prep.</p>
+      </div>
+      <div class="entry">
+        <div class="date">AUG 2023 — MAY 2026</div>
+        <h3>Chemistry &amp; Mathematics Tutor</h3>
+        <div class="place">McMurry University · Part-time</div>
+        <p>Helped students hit their academic goals through homework support, lab prep, and exam review — one-on-one and in small groups.</p>
+      </div>
+      <div class="entry">
+        <div class="date">JUN 2024 — AUG 2024</div>
+        <h3>Undergraduate Researcher</h3>
+        <div class="place">McMurry University · Internship</div>
+        <p>Ran organic and inorganic synthesis experiments using FTIR, GCMS, NMR, and UV-Vis instrumentation. Presented findings at the internship's closing showcase.</p>
+      </div>
+      <div class="entry">
+        <div class="date">AUG 2023 — DEC 2023</div>
+        <h3>Nursing Chemistry Laboratory Assistant</h3>
+        <div class="place">McMurry University · Part-time</div>
+        <p>Prepared weekly nursing chemistry labs — apparatus setup, reagent prep, and safe waste disposal — and graded exams and lab notebooks.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="section-head reveal">
+      <div class="section-tag">// 03 Tutoring</div>
+      <h2>How I can help you</h2>
+    </div>
+    <div class="services reveal">
+      <div class="service">
+        <div class="icon">1:1</div>
+        <h3>Private Tutoring</h3>
+        <p>General and Organic Chemistry, taught around how you actually learn — not just a recap of lecture slides.</p>
+      </div>
+      <div class="service">
+        <div class="icon">SI</div>
+        <h3>Exam &amp; Homework Prep</h3>
+        <p>Focused sessions before exams and problem sets, built from real SI-leader experience running review sessions.</p>
+      </div>
+      <div class="service">
+        <div class="icon">Lab</div>
+        <h3>Lab &amp; Report Support</h3>
+        <p>Help with lab prep, notebooks, and report write-ups — grounded in hands-on synthesis and instrumentation work.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-head reveal">
+      <div class="section-tag">// 04 Reagents on Hand</div>
+      <h2>Skills &amp; tools</h2>
+    </div>
+    <div class="reagents reveal">
+      <span class="tag">Organic Synthesis</span>
+      <span class="tag">Inorganic Synthesis</span>
+      <span class="tag">Analytical Skills</span>
+      <span class="tag">Research Skills</span>
+      <span class="tag">Good Laboratory Practice</span>
+      <span class="tag">Standard Operating Procedure</span>
+      <span class="tag">Teaching</span>
+      <span class="tag">Academic Advising</span>
+      <span class="tag">Public Speaking</span>
+      <span class="tag">Goal Setting</span>
+      <span class="tag">Microsoft Excel</span>
+      <span class="tag">Microsoft Word</span>
+      <span class="tag">Microsoft PowerPoint</span>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="contact reveal">
+      <div>
+        <h2>Struggling with Chemistry?</h2>
+        <p>Send me a message with what you're working on and your schedule — I'll get back to you within a day to set up your first session.</p>
+      </div>
+      <div class="contact-actions">
+        <a class="btn btn-primary" href="mailto:yumel.calaunan@example.com">Email me</a>
+        <a class="btn btn-ghost" style="border-color:#F4F6EF; color:#F4F6EF;" href="https://www.linkedin.com/in/yumel-calaunan/" target="_blank" rel="noopener">View LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>© 2026 Yumel Calaunan — Chemistry &amp; Math Tutoring, Los Angeles Metro Area</footer>
 </div>
 
-<!-- SERVICES -->
-<section class="services" id="services">
-  <div class="section-tag">What I Offer</div>
-  <h2>Aesthetic Services</h2>
-  <div class="services-grid">
-    <div class="service-card">
-      <div class="service-num">01</div>
-      <div class="service-title">Facial Sculpting</div>
-      <div class="service-desc">Advanced facial contouring techniques using dermal fillers to define and enhance natural facial structure with precision.</div>
-    </div>
-    <div class="service-card">
-      <div class="service-num">02</div>
-      <div class="service-title">Laser Treatments</div>
-      <div class="service-desc">Certified aesthetic laser operator delivering skin rejuvenation and resurfacing treatments with clinical-grade equipment.</div>
-    </div>
-    <div class="service-card">
-      <div class="service-num">03</div>
-      <div class="service-title">Anti-Ageing</div>
-      <div class="service-desc">Botulinum toxin and biostimulator treatments for natural, refreshed results that respect your individual features.</div>
-    </div>
-    <div class="service-card">
-      <div class="service-num">04</div>
-      <div class="service-title">Skin Consultations</div>
-      <div class="service-desc">Comprehensive skin assessment and personalised treatment planning tailored to your aesthetic goals and skin type.</div>
-    </div>
-    <div class="service-card">
-      <div class="service-num">05</div>
-      <div class="service-title">Lip Enhancement</div>
-      <div class="service-desc">Subtle, natural-looking lip augmentation and definition using premium hyaluronic acid fillers for beautiful results.</div>
-    </div>
-    <div class="service-card">
-      <div class="service-num">06</div>
-      <div class="service-title">Medical Aesthetics</div>
-      <div class="service-desc">Full spectrum of non-surgical medical aesthetic procedures, combining clinical safety with artistic precision.</div>
-    </div>
-  </div>
-</section>
+<script>
+  // ambient bubbles
+  const bubbleWrap = document.getElementById('bubbles');
+  const bubbleCount = window.innerWidth < 700 ? 8 : 14;
+  for(let i=0;i<bubbleCount;i++){
+    const b = document.createElement('div');
+    b.className = 'bubble';
+    const size = 6 + Math.random()*22;
+    b.style.width = size+'px';
+    b.style.height = size+'px';
+    b.style.left = Math.random()*100+'%';
+    b.style.animationDuration = (10 + Math.random()*14)+'s';
+    b.style.animationDelay = (Math.random()*14)+'s';
+    bubbleWrap.appendChild(b);
+  }
 
-<!-- EXPERIENCE -->
-<section class="experience" id="experience">
-  <div class="exp-left">
-    <div class="section-tag">My Journey</div>
-    <h2>International Experience</h2>
-    <p class="exp-intro">Trained and practised across Europe and North America, bringing a global perspective to aesthetic medicine right here in London.</p>
-  </div>
-  <div class="exp-right">
-    <div class="timeline">
-      <div class="timeline-item">
-        <div class="tl-dot"></div>
-        <div class="tl-content">
-          <div class="tl-period">Nov 2024 – Present</div>
-          <div class="tl-role">Aesthetic Practitioner</div>
-          <div class="tl-place">Facial Sculpting Clinics · South Kensington, London 🇬🇧</div>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="tl-dot"></div>
-        <div class="tl-content">
-          <div class="tl-period">Jan 2022 – Sep 2024</div>
-          <div class="tl-role">Doctor</div>
-          <div class="tl-place">Royal Diagnostic Center · Tirana, Albania 🇦🇱</div>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="tl-dot"></div>
-        <div class="tl-content">
-          <div class="tl-period">Sep 2023 – Nov 2023</div>
-          <div class="tl-role">Medical Doctor</div>
-          <div class="tl-place">St. Barnabas Hospital · New York, USA 🇺🇸</div>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="tl-dot"></div>
-        <div class="tl-content">
-          <div class="tl-period">Mar 2023 – May 2023</div>
-          <div class="tl-role">Resident Doctor</div>
-          <div class="tl-place">BHR University Hospitals NHS Trust · London 🇬🇧</div>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="tl-dot"></div>
-        <div class="tl-content">
-          <div class="tl-period">Sep 2021 – Dec 2021</div>
-          <div class="tl-role">Doctor</div>
-          <div class="tl-place">University Hospital "Nene Tereza" · Tirana, Albania 🇦🇱</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CERTIFICATIONS -->
-<section class="certs" id="certifications">
-  <div class="section-tag">Credentials</div>
-  <h2>Licences &amp; Certifications</h2>
-  <div class="cert-grid">
-    <div class="cert-card">
-      <div class="cert-icon">✦</div>
-      <div class="cert-name">Certified Aesthetic Laser Operator</div>
-      <div class="cert-issuer">LaserProtection · CLSO/M</div>
-      <div class="cert-date">Issued July 2024</div>
-    </div>
-    <div class="cert-card">
-      <div class="cert-icon">✦</div>
-      <div class="cert-name">OET — Occupational English Test</div>
-      <div class="cert-issuer">OET Organisation</div>
-      <div class="cert-date">Issued March 2022</div>
-    </div>
-    <div class="cert-card">
-      <div class="cert-icon">✦</div>
-      <div class="cert-name">Medical License</div>
-      <div class="cert-issuer">Urdheri i Mjekut · Albania</div>
-      <div class="cert-date">Issued January 2022</div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section class="contact" id="contact">
-  <div class="section-tag" style="justify-content:center;">Get In Touch</div>
-  <h2>Book a Consultation</h2>
-  <p class="contact-sub">Ready to begin your aesthetic journey? Reach out for a private, personalised consultation in London.</p>
-  <div class="contact-email">hello@drledjonathaci.com</div>
-  <button class="btn-primary">Schedule Now</button>
-  <div class="contact-location">Facial Sculpting Clinics · South Kensington · London, United Kingdom</div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-name">Dr. Ledjona Thaci, MD</div>
-  <div class="footer-copy">© 2025 · All Rights Reserved</div>
-</footer>
+  // scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.15});
+  revealEls.forEach(el=>io.observe(el));
+</script>
 
 </body>
 </html>
