@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yumel Calaunan — Chemistry & Math Tutoring</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EEF0E6;
+    --paper-2:#E4E7D8;
+    --ink:#16221F;
+    --ink-soft:#3E4A44;
+    --flask:#2B6E5B;
+    --flask-deep:#1D4E40;
+    --flame:#E4703C;
+    --highlight:#F2C14E;
+    --line:rgba(22,34,31,0.14);
+    --radius:2px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Source Serif 4', serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
+  }
+
+  .display{font-family:'Space Grotesk', sans-serif;}
+  .mono{font-family:'IBM Plex Mono', monospace;}
+
+  a{color:inherit;}
+  :focus-visible{outline:2px solid var(--flame); outline-offset:3px;}
+
+  /* ---------- ambient beaker bubbles ---------- */
+  .bubbles{position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden;}
+  .bubble{
+    position:absolute; bottom:-40px; border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, rgba(43,110,91,0.16), rgba(43,110,91,0.03));
+    animation:rise linear infinite;
+  }
+  @keyframes rise{
+    0%{transform:translateY(0) translateX(0); opacity:0;}
+    8%{opacity:1;}
+    100%{transform:translateY(-115vh) translateX(20px); opacity:0;}
+  }
+
+  .wrap{max-width:1080px; margin:0 auto; padding:0 32px; position:relative; z-index:1;}
+
+  /* ---------- nav ---------- */
+  nav{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:28px 32px; max-width:1080px; margin:0 auto; position:relative; z-index:2;
+  }
+  .nav-mark{font-family:'Space Grotesk', sans-serif; font-weight:700; letter-spacing:0.04em; font-size:15px;}
+  .nav-mark span{color:var(--flask);}
+  nav .links{display:flex; gap:28px; font-family:'Space Grotesk',sans-serif; font-size:14px; font-weight:500;}
+  nav .links a{text-decoration:none; opacity:0.75; transition:opacity .2s;}
+  nav .links a:hover{opacity:1;}
+  .links{display:flex;}
+  @media (max-width:640px){ nav .links{display:none;} }
+
+  /* ---------- hero ---------- */
+  .hero{
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:56px; align-items:center;
+    padding:56px 0 88px; position:relative; z-index:1;
+  }
+  @media (max-width:860px){ .hero{grid-template-columns:1fr; padding-top:24px;} }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size:12.5px; letter-spacing:0.14em;
+    text-transform:uppercase; color:var(--flask-deep); display:flex; align-items:center; gap:10px;
+    opacity:0; animation:fadeUp .7s ease forwards .1s;
+  }
+  .eyebrow::before{content:''; width:22px; height:1px; background:var(--flame);}
+
+  h1{
+    font-family:'Space Grotesk', sans-serif; font-weight:600; font-size:clamp(38px,5vw,58px);
+    line-height:1.05; margin:18px 0 20px; letter-spacing:-0.01em;
+    opacity:0; animation:fadeUp .7s ease forwards .25s;
+  }
+  h1 em{font-style:normal; color:var(--flask);}
+
+  .hero p.sub{
+    font-size:18px; color:var(--ink-soft); max-width:46ch; margin:0 0 32px;
+    opacity:0; animation:fadeUp .7s ease forwards .4s;
+  }
+
+  .cta-row{display:flex; gap:16px; flex-wrap:wrap; opacity:0; animation:fadeUp .7s ease forwards .55s;}
+  .btn{
+    font-family:'Space Grotesk', sans-serif; font-weight:600; font-size:14.5px;
+    padding:14px 26px; border-radius:var(--radius); text-decoration:none;
+    display:inline-flex; align-items:center; gap:8px; transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .btn-primary{background:var(--flask); color:#F4F6EF; box-shadow:4px 4px 0 var(--flask-deep);}
+  .btn-primary:hover{transform:translate(-2px,-2px); box-shadow:6px 6px 0 var(--flask-deep);}
+  .btn-ghost{border:1.5px solid var(--ink); color:var(--ink);}
+  .btn-ghost:hover{background:var(--ink); color:var(--paper);}
+
+  @keyframes fadeUp{ from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);} }
+
+  /* ---------- element tile (signature) ---------- */
+  .tile-stage{display:flex; justify-content:center; opacity:0; animation:fadeUp .8s ease forwards .3s;}
+  .tile{
+    width:260px; height:300px; background:var(--flask); color:#EFF3E9;
+    border-radius:6px; position:relative; padding:20px;
+    box-shadow:10px 10px 0 var(--paper-2), 10px 10px 0 1px var(--line);
+    transform:rotate(-2deg);
+    transition:transform .4s ease;
+  }
+  .tile:hover{transform:rotate(0deg) scale(1.02);}
+  .tile .num{font-family:'IBM Plex Mono',monospace; font-size:14px; opacity:0.8;}
+  .tile .symbol{
+    font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:76px; text-align:center;
+    margin-top:10px; letter-spacing:-0.02em;
+  }
+  .tile .name{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15px; text-align:center; margin-top:6px;}
+  .tile .mass{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; text-align:center; margin-top:4px; opacity:0.85;
+  }
+  .tile::after{
+    content:''; position:absolute; inset:8px; border:1px solid rgba(239,243,233,0.25); border-radius:3px; pointer-events:none;
+  }
+  .tile .drip{
+    position:absolute; width:6px; height:6px; border-radius:50%; background:var(--highlight);
+    bottom:-6px; left:50%; animation:drip 2.6s ease-in infinite;
+  }
+  @keyframes drip{
+    0%{transform:translate(-50%,0) scale(1); opacity:1;}
+    70%{opacity:1;}
+    100%{transform:translate(-50%,220px) scale(0.6); opacity:0;}
+  }
+
+  /* ---------- section shell ---------- */
+  section{padding:72px 0; position:relative; z-index:1;}
+  .section-head{margin-bottom:44px;}
+  .section-tag{
+    font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--flame); margin-bottom:10px;
+  }
+  h2{font-family:'Space Grotesk',sans-serif; font-size:clamp(26px,3.4vw,36px); font-weight:600; margin:0; letter-spacing:-0.01em;}
+
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ---------- about ---------- */
+  .about-grid{display:grid; grid-template-columns:0.9fr 1.1fr; gap:48px; align-items:start;}
+  @media (max-width:800px){.about-grid{grid-template-columns:1fr;}}
+  .about-grid p{font-size:16.5px; color:var(--ink-soft); margin:0 0 16px;}
+  .stat-card{
+    background:var(--paper-2); border:1px solid var(--line); border-radius:4px; padding:22px;
+    display:grid; grid-template-columns:1fr 1fr; gap:20px;
+  }
+  .stat b{display:block; font-family:'Space Grotesk',sans-serif; font-size:28px; color:var(--flask-deep);}
+  .stat span{font-size:12.5px; font-family:'IBM Plex Mono',monospace; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.05em;}
+
+  /* ---------- timeline (lab notebook) ---------- */
+  .notebook{
+    border-left:2px solid var(--line); padding-left:32px; position:relative;
+  }
+  .entry{margin-bottom:38px; position:relative;}
+  .entry:last-child{margin-bottom:0;}
+  .entry::before{
+    content:''; position:absolute; left:-38px; top:6px; width:11px; height:11px; border-radius:50%;
+    background:var(--paper); border:2.5px solid var(--flask);
+  }
+  .entry .date{font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--flame); letter-spacing:0.03em;}
+  .entry h3{font-family:'Space Grotesk',sans-serif; font-size:19px; margin:6px 0 4px; font-weight:600;}
+  .entry .place{font-size:13.5px; color:var(--ink-soft); margin-bottom:8px; font-style:italic;}
+  .entry p{font-size:15px; color:var(--ink-soft); margin:0; max-width:62ch;}
+
+  /* ---------- services ---------- */
+  .services{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  @media (max-width:800px){.services{grid-template-columns:1fr;}}
+  .service{
+    background:var(--paper); border:1.5px solid var(--ink); border-radius:3px; padding:26px;
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .service:hover{transform:translateY(-6px); box-shadow:6px 6px 0 var(--flask);}
+  .service .icon{
+    width:38px; height:38px; border-radius:50%; background:var(--flask); margin-bottom:16px;
+    display:flex; align-items:center; justify-content:center; color:#fff; font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:600;
+  }
+  .service h3{font-family:'Space Grotesk',sans-serif; font-size:17px; margin:0 0 8px;}
+  .service p{font-size:14.5px; color:var(--ink-soft); margin:0;}
+
+  /* ---------- reagents / skills ---------- */
+  .reagents{display:flex; flex-wrap:wrap; gap:10px;}
+  .tag{
+    font-family:'IBM Plex Mono',monospace; font-size:12.5px; padding:8px 14px; border-radius:20px;
+    border:1px solid var(--line); background:var(--paper-2); color:var(--ink-soft);
+    transition:background .2s ease, color .2s ease, border-color .2s ease;
+  }
+  .tag:hover{background:var(--flask); color:#fff; border-color:var(--flask);}
+
+  /* ---------- contact ---------- */
+  .contact{
+    background:var(--ink); color:var(--paper); border-radius:6px; padding:56px 44px;
+    display:grid; grid-template-columns:1.2fr 0.8fr; gap:32px; align-items:center; position:relative; overflow:hidden;
+  }
+  @media (max-width:800px){.contact{grid-template-columns:1fr; padding:40px 26px;}}
+  .contact h2{color:var(--paper);}
+  .contact p{color:#C7D0C5; max-width:46ch; margin:14px 0 0; font-size:15.5px;}
+  .contact .btn-primary{background:var(--flame); box-shadow:4px 4px 0 #a8461f;}
+  .contact .btn-primary:hover{box-shadow:6px 6px 0 #a8461f;}
+  .contact-actions{display:flex; flex-direction:column; gap:14px; align-items:flex-start;}
+  .contact::after{
+    content:''; position:absolute; right:-60px; top:-60px; width:220px; height:220px; border-radius:50%;
+    border:1px solid rgba(244,246,239,0.12);
+  }
+
+  footer{padding:32px 0 48px; text-align:center; font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--ink-soft);}
+</style>
+</head>
+<body>
+
+<div class="bubbles" id="bubbles"></div>
+
+<nav>
+  <a class="nav-mark" href="https://www.linkedin.com/in/yumel-calaunan/" target="_blank" rel="noopener" style="text-decoration:none;">YUMEL <span>CALAUNAN</span></a>
+  <div class="links">
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#services">Tutoring</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <section class="hero">
+    <div>
+      <div class="eyebrow">BS Chemistry · Los Angeles Metro Area</div>
+      <h1>Chemistry stops being<br><em>confusing</em> here.</h1>
+      <p class="sub">I'm Yumel — a chemistry graduate and former Supplemental Instruction Leader who spent three years turning General &amp; Organic Chemistry from "impossible" into "got it." Now I tutor students one-on-one, the same way.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#contact">Book a session</a>
+        <a class="btn btn-ghost" href="#experience">See my background</a>
+      </div>
+    </div>
+    <div class="tile-stage">
+      <div class="tile">
+        <div class="num">Yc</div>
+        <div class="symbol">Yc</div>
+        <div class="name">Yumel Calaunan</div>
+        <div class="mass">2.10 yrs teaching experience</div>
+        <div class="drip"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="section-head reveal">
+      <div class="section-tag">// 01 About</div>
+      <h2>From the lab bench to the whiteboard</h2>
+    </div>
+    <div class="about-grid reveal">
+      <div>
+        <p>I graduated with a BS in Chemistry from McMurry University, where I spent two years as a Supplemental Instruction Leader and tutor — running sessions, office hours, and exam prep for General and Organic Chemistry students of every major.</p>
+        <p>Alongside teaching, I worked as an undergraduate researcher in organic and inorganic synthesis, running instruments like FTIR, GCMS, and NMR. That lab experience is exactly what I bring into tutoring: I don't just explain the concept, I show you why it works.</p>
+      </div>
+      <div class="stat-card">
+        <div class="stat"><b>2 yrs 10 mo</b><span>Tutoring &amp; SI leadership</span></div>
+        <div class="stat"><b>3 mo</b><span>Undergrad research internship</span></div>
+        <div class="stat"><b>4</b><span>Instruments mastered</span></div>
+        <div class="stat"><b>2</b><span>Subjects: Gen &amp; Organic Chem</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="section-head reveal">
+      <div class="section-tag">// 02 Lab Notebook</div>
+      <h2>Where the experience comes from</h2>
+    </div>
+    <div class="notebook reveal">
+      <div class="entry">
+        <div class="date">JAN 2024 — MAY 2026</div>
+        <h3>Supplemental Instruction Leader</h3>
+        <div class="place">McMurry University · Abilene, TX · Part-time</div>
+        <p>Planned and led SI sessions in General and Organic Chemistry for students across majors and class levels, plus office hours for homework and exam prep.</p>
+      </div>
+      <div class="entry">
+        <div class="date">AUG 2023 — MAY 2026</div>
+        <h3>Chemistry &amp; Mathematics Tutor</h3>
+        <div class="place">McMurry University · Part-time</div>
+        <p>Helped students hit their academic goals through homework support, lab prep, and exam review — one-on-one and in small groups.</p>
+      </div>
+      <div class="entry">
+        <div class="date">JUN 2024 — AUG 2024</div>
+        <h3>Undergraduate Researcher</h3>
+        <div class="place">McMurry University · Internship</div>
+        <p>Ran organic and inorganic synthesis experiments using FTIR, GCMS, NMR, and UV-Vis instrumentation. Presented findings at the internship's closing showcase.</p>
+      </div>
+      <div class="entry">
+        <div class="date">AUG 2023 — DEC 2023</div>
+        <h3>Nursing Chemistry Laboratory Assistant</h3>
+        <div class="place">McMurry University · Part-time</div>
+        <p>Prepared weekly nursing chemistry labs — apparatus setup, reagent prep, and safe waste disposal — and graded exams and lab notebooks.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="section-head reveal">
+      <div class="section-tag">// 03 Tutoring</div>
+      <h2>How I can help you</h2>
+    </div>
+    <div class="services reveal">
+      <div class="service">
+        <div class="icon">1:1</div>
+        <h3>Private Tutoring</h3>
+        <p>General and Organic Chemistry, taught around how you actually learn — not just a recap of lecture slides.</p>
+      </div>
+      <div class="service">
+        <div class="icon">SI</div>
+        <h3>Exam &amp; Homework Prep</h3>
+        <p>Focused sessions before exams and problem sets, built from real SI-leader experience running review sessions.</p>
+      </div>
+      <div class="service">
+        <div class="icon">Lab</div>
+        <h3>Lab &amp; Report Support</h3>
+        <p>Help with lab prep, notebooks, and report write-ups — grounded in hands-on synthesis and instrumentation work.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-head reveal">
+      <div class="section-tag">// 04 Reagents on Hand</div>
+      <h2>Skills &amp; tools</h2>
+    </div>
+    <div class="reagents reveal">
+      <span class="tag">Organic Synthesis</span>
+      <span class="tag">Inorganic Synthesis</span>
+      <span class="tag">Analytical Skills</span>
+      <span class="tag">Research Skills</span>
+      <span class="tag">Good Laboratory Practice</span>
+      <span class="tag">Standard Operating Procedure</span>
+      <span class="tag">Teaching</span>
+      <span class="tag">Academic Advising</span>
+      <span class="tag">Public Speaking</span>
+      <span class="tag">Goal Setting</span>
+      <span class="tag">Microsoft Excel</span>
+      <span class="tag">Microsoft Word</span>
+      <span class="tag">Microsoft PowerPoint</span>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="contact reveal">
+      <div>
+        <h2>Struggling with Chemistry?</h2>
+        <p>Send me a message with what you're working on and your schedule — I'll get back to you within a day to set up your first session.</p>
+      </div>
+      <div class="contact-actions">
+        <a class="btn btn-primary" href="mailto:yumel.calaunan@example.com">Email me</a>
+        <a class="btn btn-ghost" style="border-color:#F4F6EF; color:#F4F6EF;" href="https://www.linkedin.com/in/yumel-calaunan/" target="_blank" rel="noopener">View LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>© 2026 Yumel Calaunan — Chemistry &amp; Math Tutoring, Los Angeles Metro Area</footer>
+</div>
+
+<script>
+  // ambient bubbles
+  const bubbleWrap = document.getElementById('bubbles');
+  const bubbleCount = window.innerWidth < 700 ? 8 : 14;
+  for(let i=0;i<bubbleCount;i++){
+    const b = document.createElement('div');
+    b.className = 'bubble';
+    const size = 6 + Math.random()*22;
+    b.style.width = size+'px';
+    b.style.height = size+'px';
+    b.style.left = Math.random()*100+'%';
+    b.style.animationDuration = (10 + Math.random()*14)+'s';
+    b.style.animationDelay = (Math.random()*14)+'s';
+    bubbleWrap.appendChild(b);
+  }
+
+  // scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.15});
+  revealEls.forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
