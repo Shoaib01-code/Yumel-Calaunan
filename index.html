@@ -3,398 +3,503 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yumel Calaunan — Chemistry & Math Tutoring</title>
+<title>Shoaib Akhtar — Full Stack Laravel Developer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#EEF0E6;
-    --paper-2:#E4E7D8;
-    --ink:#16221F;
-    --ink-soft:#3E4A44;
-    --flask:#2B6E5B;
-    --flask-deep:#1D4E40;
-    --flame:#E4703C;
-    --highlight:#F2C14E;
-    --line:rgba(22,34,31,0.14);
-    --radius:2px;
+    --bg: #12131c;
+    --surface: #1a1c29;
+    --surface-2: #20222f;
+    --border: #2c2f42;
+    --text: #e6e6ee;
+    --muted: #8b8da3;
+    --laravel: #ff2d20;
+    --cyan: #5eead4;
+    --amber: #f5c451;
   }
-
-  *{box-sizing:border-box;}
+  *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
   body{
-    margin:0;
-    background:var(--paper);
-    color:var(--ink);
-    font-family:'Source Serif 4', serif;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter', sans-serif;
     line-height:1.6;
     overflow-x:hidden;
   }
+  ::selection{ background:var(--laravel); color:#fff; }
+  .mono{ font-family:'JetBrains Mono', monospace; }
+  a{ color:inherit; text-decoration:none; }
 
-  @media (prefers-reduced-motion: reduce){
-    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
-  }
-
-  .display{font-family:'Space Grotesk', sans-serif;}
-  .mono{font-family:'IBM Plex Mono', monospace;}
-
-  a{color:inherit;}
-  :focus-visible{outline:2px solid var(--flame); outline-offset:3px;}
-
-  /* ---------- ambient beaker bubbles ---------- */
-  .bubbles{position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden;}
-  .bubble{
-    position:absolute; bottom:-40px; border-radius:50%;
-    background:radial-gradient(circle at 30% 30%, rgba(43,110,91,0.16), rgba(43,110,91,0.03));
-    animation:rise linear infinite;
-  }
-  @keyframes rise{
-    0%{transform:translateY(0) translateX(0); opacity:0;}
-    8%{opacity:1;}
-    100%{transform:translateY(-115vh) translateX(20px); opacity:0;}
-  }
-
-  .wrap{max-width:1080px; margin:0 auto; padding:0 32px; position:relative; z-index:1;}
-
-  /* ---------- nav ---------- */
+  /* ---------- NAV ---------- */
   nav{
+    position:fixed; top:0; left:0; right:0; z-index:100;
     display:flex; justify-content:space-between; align-items:center;
-    padding:28px 32px; max-width:1080px; margin:0 auto; position:relative; z-index:2;
+    padding:18px 6vw;
+    background:rgba(18,19,28,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
   }
-  .nav-mark{font-family:'Space Grotesk', sans-serif; font-weight:700; letter-spacing:0.04em; font-size:15px;}
-  .nav-mark span{color:var(--flask);}
-  nav .links{display:flex; gap:28px; font-family:'Space Grotesk',sans-serif; font-size:14px; font-weight:500;}
-  nav .links a{text-decoration:none; opacity:0.75; transition:opacity .2s;}
-  nav .links a:hover{opacity:1;}
-  .links{display:flex;}
-  @media (max-width:640px){ nav .links{display:none;} }
+  .logo{ font-family:'JetBrains Mono',monospace; font-weight:700; font-size:1.05rem; }
+  .logo span{ color:var(--laravel); }
+  .nav-links{ display:flex; gap:28px; font-family:'JetBrains Mono',monospace; font-size:0.85rem; color:var(--muted); }
+  .nav-links a:hover{ color:var(--cyan); }
+  @media(max-width:700px){ .nav-links{ display:none; } }
 
-  /* ---------- hero ---------- */
+  /* ---------- HERO / TERMINAL ---------- */
   .hero{
-    display:grid; grid-template-columns:1.1fr 0.9fr; gap:56px; align-items:center;
-    padding:56px 0 88px; position:relative; z-index:1;
+    min-height:100vh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding:120px 6vw 80px;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(255,45,32,0.07), transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(94,234,212,0.06), transparent 40%);
   }
-  @media (max-width:860px){ .hero{grid-template-columns:1fr; padding-top:24px;} }
-
-  .eyebrow{
-    font-family:'IBM Plex Mono', monospace; font-size:12.5px; letter-spacing:0.14em;
-    text-transform:uppercase; color:var(--flask-deep); display:flex; align-items:center; gap:10px;
-    opacity:0; animation:fadeUp .7s ease forwards .1s;
+  .terminal{
+    width:100%; max-width:680px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:10px;
+    box-shadow:0 30px 60px rgba(0,0,0,0.5);
+    overflow:hidden;
   }
-  .eyebrow::before{content:''; width:22px; height:1px; background:var(--flame);}
-
-  h1{
-    font-family:'Space Grotesk', sans-serif; font-weight:600; font-size:clamp(38px,5vw,58px);
-    line-height:1.05; margin:18px 0 20px; letter-spacing:-0.01em;
-    opacity:0; animation:fadeUp .7s ease forwards .25s;
+  .term-bar{
+    display:flex; align-items:center; gap:8px;
+    padding:12px 16px;
+    background:var(--surface-2);
+    border-bottom:1px solid var(--border);
   }
-  h1 em{font-style:normal; color:var(--flask);}
-
-  .hero p.sub{
-    font-size:18px; color:var(--ink-soft); max-width:46ch; margin:0 0 32px;
-    opacity:0; animation:fadeUp .7s ease forwards .4s;
+  .dot{ width:11px; height:11px; border-radius:50%; }
+  .dot.red{background:#ff5f56;} .dot.yellow{background:#ffbd2e;} .dot.green{background:#27c93f;}
+  .term-title{ margin-left:10px; font-size:0.78rem; color:var(--muted); font-family:'JetBrains Mono',monospace; }
+  .term-body{ padding:26px 26px 34px; font-family:'JetBrains Mono',monospace; font-size:0.95rem; min-height:220px; }
+  .term-body .line{ margin-bottom:10px; }
+  .prompt{ color:var(--cyan); }
+  .path{ color:var(--amber); }
+  .out{ color:var(--muted); }
+  .accent{ color:var(--laravel); font-weight:700; }
+  .cursor{
+    display:inline-block; width:8px; height:1.1em; background:var(--cyan);
+    vertical-align:text-bottom; animation:blink 1s step-end infinite;
   }
+  @keyframes blink{ 50%{ opacity:0; } }
+  #typed-role{ color:var(--text); font-weight:600; }
 
-  .cta-row{display:flex; gap:16px; flex-wrap:wrap; opacity:0; animation:fadeUp .7s ease forwards .55s;}
+  .hero-sub{
+    max-width:560px; text-align:center; margin-top:28px;
+    color:var(--muted); font-size:1rem;
+  }
+  .hero-cta{ display:flex; gap:14px; margin-top:28px; flex-wrap:wrap; justify-content:center; }
   .btn{
-    font-family:'Space Grotesk', sans-serif; font-weight:600; font-size:14.5px;
-    padding:14px 26px; border-radius:var(--radius); text-decoration:none;
-    display:inline-flex; align-items:center; gap:8px; transition:transform .18s ease, box-shadow .18s ease;
+    font-family:'JetBrains Mono',monospace; font-size:0.85rem; font-weight:500;
+    padding:12px 22px; border-radius:6px; border:1px solid var(--border);
+    transition:all 0.2s ease;
   }
-  .btn-primary{background:var(--flask); color:#F4F6EF; box-shadow:4px 4px 0 var(--flask-deep);}
-  .btn-primary:hover{transform:translate(-2px,-2px); box-shadow:6px 6px 0 var(--flask-deep);}
-  .btn-ghost{border:1.5px solid var(--ink); color:var(--ink);}
-  .btn-ghost:hover{background:var(--ink); color:var(--paper);}
+  .btn.primary{ background:var(--laravel); border-color:var(--laravel); color:#fff; }
+  .btn.primary:hover{ background:#e0271b; }
+  .btn.ghost:hover{ border-color:var(--cyan); color:var(--cyan); }
 
-  @keyframes fadeUp{ from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);} }
-
-  /* ---------- element tile (signature) ---------- */
-  .tile-stage{display:flex; justify-content:center; opacity:0; animation:fadeUp .8s ease forwards .3s;}
-  .tile{
-    width:260px; height:300px; background:var(--flask); color:#EFF3E9;
-    border-radius:6px; position:relative; padding:20px;
-    box-shadow:10px 10px 0 var(--paper-2), 10px 10px 0 1px var(--line);
-    transform:rotate(-2deg);
-    transition:transform .4s ease;
-  }
-  .tile:hover{transform:rotate(0deg) scale(1.02);}
-  .tile .num{font-family:'IBM Plex Mono',monospace; font-size:14px; opacity:0.8;}
-  .tile .symbol{
-    font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:76px; text-align:center;
-    margin-top:10px; letter-spacing:-0.02em;
-  }
-  .tile .name{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15px; text-align:center; margin-top:6px;}
-  .tile .mass{
-    font-family:'IBM Plex Mono',monospace; font-size:11px; text-align:center; margin-top:4px; opacity:0.85;
-  }
-  .tile::after{
-    content:''; position:absolute; inset:8px; border:1px solid rgba(239,243,233,0.25); border-radius:3px; pointer-events:none;
-  }
-  .tile .drip{
-    position:absolute; width:6px; height:6px; border-radius:50%; background:var(--highlight);
-    bottom:-6px; left:50%; animation:drip 2.6s ease-in infinite;
-  }
-  @keyframes drip{
-    0%{transform:translate(-50%,0) scale(1); opacity:1;}
-    70%{opacity:1;}
-    100%{transform:translate(-50%,220px) scale(0.6); opacity:0;}
-  }
-
-  /* ---------- section shell ---------- */
-  section{padding:72px 0; position:relative; z-index:1;}
-  .section-head{margin-bottom:44px;}
+  /* ---------- SECTION SHARED ---------- */
+  section{ padding:110px 6vw; max-width:1100px; margin:0 auto; }
   .section-tag{
-    font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.12em; text-transform:uppercase;
-    color:var(--flame); margin-bottom:10px;
+    font-family:'JetBrains Mono',monospace; font-size:0.8rem; color:var(--cyan);
+    margin-bottom:10px; display:block;
   }
-  h2{font-family:'Space Grotesk',sans-serif; font-size:clamp(26px,3.4vw,36px); font-weight:600; margin:0; letter-spacing:-0.01em;}
+  .section-tag::before{ content:"~/portfolio "; color:var(--muted); }
+  h2{ font-family:'JetBrains Mono',monospace; font-size:clamp(1.6rem,3vw,2.2rem); margin-bottom:38px; font-weight:700; }
 
-  .reveal{opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease;}
-  .reveal.in{opacity:1; transform:translateY(0);}
+  /* ---------- ABOUT ---------- */
+  .about-grid{ display:grid; grid-template-columns:1fr; gap:0; }
+  .code-card{
+    background:var(--surface); border:1px solid var(--border); border-radius:10px;
+    padding:30px 34px; font-family:'JetBrains Mono',monospace; font-size:0.92rem;
+    overflow-x:auto;
+  }
+  .code-card .kw{ color:#c586c0; }
+  .code-card .fn{ color:#dcdcaa; }
+  .code-card .str{ color:var(--amber); }
+  .code-card .prop{ color:var(--cyan); }
+  .code-card .com{ color:var(--muted); font-style:italic; }
+  .code-card .line{ padding-left:20px; }
 
-  /* ---------- about ---------- */
-  .about-grid{display:grid; grid-template-columns:0.9fr 1.1fr; gap:48px; align-items:start;}
-  @media (max-width:800px){.about-grid{grid-template-columns:1fr;}}
-  .about-grid p{font-size:16.5px; color:var(--ink-soft); margin:0 0 16px;}
-  .stat-card{
-    background:var(--paper-2); border:1px solid var(--line); border-radius:4px; padding:22px;
-    display:grid; grid-template-columns:1fr 1fr; gap:20px;
+  /* ---------- SKILLS as composer.json ---------- */
+  .skills-wrap{ display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:18px; margin-top:6px; }
+  .skill-card{
+    background:var(--surface); border:1px solid var(--border); border-radius:8px;
+    padding:20px 22px;
   }
-  .stat b{display:block; font-family:'Space Grotesk',sans-serif; font-size:28px; color:var(--flask-deep);}
-  .stat span{font-size:12.5px; font-family:'IBM Plex Mono',monospace; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.05em;}
+  .skill-card .ver{ color:var(--muted); font-family:'JetBrains Mono',monospace; font-size:0.78rem; float:right; }
+  .skill-card h4{ font-family:'JetBrains Mono',monospace; font-size:0.95rem; margin-bottom:8px; }
+  .bar{ height:5px; background:var(--surface-2); border-radius:3px; overflow:hidden; margin-top:10px; }
+  .bar-fill{ height:100%; background:linear-gradient(90deg,var(--laravel),var(--amber)); border-radius:3px; }
 
-  /* ---------- timeline (lab notebook) ---------- */
-  .notebook{
-    border-left:2px solid var(--line); padding-left:32px; position:relative;
+  /* ---------- EXPERIENCE as git log ---------- */
+  .git-log{ position:relative; padding-left:28px; }
+  .git-log::before{
+    content:""; position:absolute; left:6px; top:6px; bottom:6px; width:2px;
+    background:var(--border);
   }
-  .entry{margin-bottom:38px; position:relative;}
-  .entry:last-child{margin-bottom:0;}
-  .entry::before{
-    content:''; position:absolute; left:-38px; top:6px; width:11px; height:11px; border-radius:50%;
-    background:var(--paper); border:2.5px solid var(--flask);
+  .commit{ position:relative; padding-bottom:34px; }
+  .commit:last-child{ padding-bottom:0; }
+  .commit::before{
+    content:""; position:absolute; left:-28px; top:4px; width:14px; height:14px;
+    border-radius:50%; background:var(--bg); border:3px solid var(--laravel);
   }
-  .entry .date{font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--flame); letter-spacing:0.03em;}
-  .entry h3{font-family:'Space Grotesk',sans-serif; font-size:19px; margin:6px 0 4px; font-weight:600;}
-  .entry .place{font-size:13.5px; color:var(--ink-soft); margin-bottom:8px; font-style:italic;}
-  .entry p{font-size:15px; color:var(--ink-soft); margin:0; max-width:62ch;}
+  .commit-head{ display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; }
+  .commit-hash{ font-family:'JetBrains Mono',monospace; color:var(--amber); font-size:0.85rem; }
+  .commit-role{ font-family:'JetBrains Mono',monospace; font-weight:700; color:var(--text); font-size:1rem; }
+  .commit-meta{ font-family:'JetBrains Mono',monospace; font-size:0.78rem; color:var(--muted); margin-top:4px; }
+  .commit ul{ margin:12px 0 0 18px; color:var(--muted); font-size:0.92rem; }
+  .commit ul li{ margin-bottom:6px; }
 
-  /* ---------- services ---------- */
-  .services{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
-  @media (max-width:800px){.services{grid-template-columns:1fr;}}
-  .service{
-    background:var(--paper); border:1.5px solid var(--ink); border-radius:3px; padding:26px;
-    transition:transform .25s ease, box-shadow .25s ease;
+  /* ---------- PROJECTS: proper card grid ---------- */
+  .project-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:22px; }
+  .project-card{
+    background:var(--surface); border:1px solid var(--border); border-radius:12px;
+    overflow:hidden; display:flex; flex-direction:column;
+    transition:transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
   }
-  .service:hover{transform:translateY(-6px); box-shadow:6px 6px 0 var(--flask);}
-  .service .icon{
-    width:38px; height:38px; border-radius:50%; background:var(--flask); margin-bottom:16px;
-    display:flex; align-items:center; justify-content:center; color:#fff; font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:600;
+  .project-card:hover{
+    transform:translateY(-6px);
+    border-color:var(--cyan);
+    box-shadow:0 20px 40px rgba(0,0,0,0.35);
   }
-  .service h3{font-family:'Space Grotesk',sans-serif; font-size:17px; margin:0 0 8px;}
-  .service p{font-size:14.5px; color:var(--ink-soft); margin:0;}
+  .project-top-bar{ height:5px; }
+  .project-card-body{ padding:26px 26px 24px; display:flex; flex-direction:column; flex:1; }
+  .project-card-header{ display:flex; justify-content:space-between; align-items:flex-start; gap:10px; margin-bottom:6px; }
+  .project-title{ font-family:'JetBrains Mono',monospace; font-weight:700; font-size:1.15rem; color:var(--text); }
+  .project-badge{
+    font-family:'JetBrains Mono',monospace; font-size:0.68rem; padding:4px 10px;
+    border-radius:20px; white-space:nowrap; border:1px solid var(--border); color:var(--muted);
+  }
+  .project-client{ font-size:0.8rem; color:var(--muted); margin-bottom:14px; font-family:'JetBrains Mono',monospace; }
+  .project-desc{ color:var(--text); opacity:0.85; font-size:0.93rem; margin-bottom:18px; flex:1; }
+  .project-tech{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px; }
+  .tech-pill{
+    font-family:'JetBrains Mono',monospace; font-size:0.72rem; padding:5px 11px;
+    background:var(--surface-2); border-radius:6px; color:var(--cyan);
+  }
+  .project-link{
+    font-family:'JetBrains Mono',monospace; font-size:0.85rem; font-weight:600;
+    color:var(--text); display:inline-flex; align-items:center; gap:6px;
+    padding-top:14px; border-top:1px solid var(--border);
+  }
+  .project-link:hover{ color:var(--laravel); }
+  .project-link.disabled{ color:var(--muted); cursor:default; }
 
-  /* ---------- reagents / skills ---------- */
-  .reagents{display:flex; flex-wrap:wrap; gap:10px;}
-  .tag{
-    font-family:'IBM Plex Mono',monospace; font-size:12.5px; padding:8px 14px; border-radius:20px;
-    border:1px solid var(--line); background:var(--paper-2); color:var(--ink-soft);
-    transition:background .2s ease, color .2s ease, border-color .2s ease;
+  /* ---------- PROJECTS as repos ---------- */
+  /* ---------- CONTACT as form ---------- */
+  .contact-terminal{
+    background:var(--surface); border:1px solid var(--border); border-radius:10px;
+    max-width:600px; margin:0 auto; overflow:hidden;
   }
-  .tag:hover{background:var(--flask); color:#fff; border-color:var(--flask);}
+  .contact-body{ padding:30px 32px; font-family:'JetBrains Mono',monospace; }
+  .field{ margin-bottom:18px; }
+  .field label{ display:block; font-size:0.8rem; color:var(--cyan); margin-bottom:6px; }
+  .field label::before{ content:"$ "; color:var(--muted); }
+  .field input, .field textarea{
+    width:100%; background:var(--surface-2); border:1px solid var(--border);
+    border-radius:6px; padding:11px 14px; color:var(--text); font-family:'Inter',sans-serif;
+    font-size:0.9rem;
+  }
+  .field input:focus, .field textarea:focus{ outline:2px solid var(--laravel); border-color:transparent; }
+  .field textarea{ resize:vertical; min-height:90px; }
+  .submit-btn{
+    width:100%; padding:13px; background:var(--laravel); border:none; border-radius:6px;
+    color:#fff; font-family:'JetBrains Mono',monospace; font-weight:600; font-size:0.9rem; cursor:pointer;
+    transition:background 0.2s ease;
+  }
+  .submit-btn:hover{ background:#e0271b; }
 
-  /* ---------- contact ---------- */
-  .contact{
-    background:var(--ink); color:var(--paper); border-radius:6px; padding:56px 44px;
-    display:grid; grid-template-columns:1.2fr 0.8fr; gap:32px; align-items:center; position:relative; overflow:hidden;
+  footer{
+    text-align:center; padding:40px 6vw 50px; color:var(--muted);
+    font-family:'JetBrains Mono',monospace; font-size:0.8rem; border-top:1px solid var(--border);
   }
-  @media (max-width:800px){.contact{grid-template-columns:1fr; padding:40px 26px;}}
-  .contact h2{color:var(--paper);}
-  .contact p{color:#C7D0C5; max-width:46ch; margin:14px 0 0; font-size:15.5px;}
-  .contact .btn-primary{background:var(--flame); box-shadow:4px 4px 0 #a8461f;}
-  .contact .btn-primary:hover{box-shadow:6px 6px 0 #a8461f;}
-  .contact-actions{display:flex; flex-direction:column; gap:14px; align-items:flex-start;}
-  .contact::after{
-    content:''; position:absolute; right:-60px; top:-60px; width:220px; height:220px; border-radius:50%;
-    border:1px solid rgba(244,246,239,0.12);
-  }
-
-  footer{padding:32px 0 48px; text-align:center; font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--ink-soft);}
+  @media(prefers-reduced-motion:reduce){ .cursor{ animation:none; } }
 </style>
 </head>
 <body>
 
-<div class="bubbles" id="bubbles"></div>
-
 <nav>
-  <a class="nav-mark" href="https://www.linkedin.com/in/yumel-calaunan/" target="_blank" rel="noopener" style="text-decoration:none;">YUMEL <span>CALAUNAN</span></a>
-  <div class="links">
-    <a href="#about">About</a>
-    <a href="#experience">Experience</a>
-    <a href="#services">Tutoring</a>
-    <a href="#contact">Contact</a>
+  <div class="logo">shoaib<span>::</span>dev</div>
+  <div class="nav-links">
+    <a href="#about">about</a>
+    <a href="#skills">skills</a>
+    <a href="#experience">experience</a>
+    <a href="#projects">projects</a>
+    <a href="#contact">contact</a>
   </div>
 </nav>
 
-<div class="wrap">
-  <section class="hero">
-    <div>
-      <div class="eyebrow">BS Chemistry · Los Angeles Metro Area</div>
-      <h1>Chemistry stops being<br><em>confusing</em> here.</h1>
-      <p class="sub">I'm Yumel — a chemistry graduate and former Supplemental Instruction Leader who spent three years turning General &amp; Organic Chemistry from "impossible" into "got it." Now I tutor students one-on-one, the same way.</p>
-      <div class="cta-row">
-        <a class="btn btn-primary" href="#contact">Book a session</a>
-        <a class="btn btn-ghost" href="#experience">See my background</a>
-      </div>
+<section class="hero">
+  <div class="terminal">
+    <div class="term-bar">
+      <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
+      <div class="term-title">shoaib@portfolio ~ zsh</div>
     </div>
-    <div class="tile-stage">
-      <div class="tile">
-        <div class="num">Yc</div>
-        <div class="symbol">Yc</div>
-        <div class="name">Yumel Calaunan</div>
-        <div class="mass">2.10 yrs teaching experience</div>
-        <div class="drip"></div>
-      </div>
+    <div class="term-body">
+      <div class="line"><span class="prompt">$</span> <span class="path">whoami</span></div>
+      <div class="line out">Shoaib Akhtar</div>
+      <div class="line"><span class="prompt">$</span> <span class="path">php artisan</span> <span class="accent">make:developer</span> --role</div>
+      <div class="line out">Building: <span id="typed-role"></span><span class="cursor"></span></div>
     </div>
-  </section>
+  </div>
+  <p class="hero-sub">Full-Stack Laravel Developer with 2+ years of experience architecting scalable SaaS platforms, RESTful APIs, and production systems for clients across Pakistan, the UK, and Australia.</p>
+  <div class="hero-cta">
+    <a href="#projects" class="btn primary">View Projects</a>
+    <a href="#contact" class="btn ghost">Get In Touch</a>
+  </div>
+</section>
 
-  <section id="about">
-    <div class="section-head reveal">
-      <div class="section-tag">// 01 About</div>
-      <h2>From the lab bench to the whiteboard</h2>
-    </div>
-    <div class="about-grid reveal">
-      <div>
-        <p>I graduated with a BS in Chemistry from McMurry University, where I spent two years as a Supplemental Instruction Leader and tutor — running sessions, office hours, and exam prep for General and Organic Chemistry students of every major.</p>
-        <p>Alongside teaching, I worked as an undergraduate researcher in organic and inorganic synthesis, running instruments like FTIR, GCMS, and NMR. That lab experience is exactly what I bring into tutoring: I don't just explain the concept, I show you why it works.</p>
-      </div>
-      <div class="stat-card">
-        <div class="stat"><b>2 yrs 10 mo</b><span>Tutoring &amp; SI leadership</span></div>
-        <div class="stat"><b>3 mo</b><span>Undergrad research internship</span></div>
-        <div class="stat"><b>4</b><span>Instruments mastered</span></div>
-        <div class="stat"><b>2</b><span>Subjects: Gen &amp; Organic Chem</span></div>
-      </div>
-    </div>
-  </section>
+<section id="about">
+  <span class="section-tag">cat about.php</span>
+  <h2>About Me</h2>
+  <div class="code-card">
+    <div class="line"><span class="kw">class</span> <span class="fn">Developer</span> {</div>
+    <div class="line">&nbsp;&nbsp;<span class="prop">$name</span> = <span class="str">'Shoaib Akhtar'</span>;</div>
+    <div class="line">&nbsp;&nbsp;<span class="prop">$role</span> = <span class="str">'Full Stack Laravel Developer'</span>;</div>
+    <div class="line">&nbsp;&nbsp;<span class="prop">$location</span> = <span class="str">'Lahore, Pakistan'</span>;</div>
+    <div class="line">&nbsp;&nbsp;<span class="prop">$experience</span> = <span class="str">'2+ years'</span>;</div>
+    <div class="line">&nbsp;&nbsp;<span class="prop">$education</span> = <span class="str">'BS Software Engineering, Virtual University of Pakistan (2022–2026)'</span>;</div>
+    <div class="line">&nbsp;&nbsp;<span class="com">// Architected IFRAP, a multi-tenant SaaS platform for government &amp; enterprise clients</span></div>
+    <div class="line">&nbsp;&nbsp;<span class="com">// Skilled in Repository/Service layer patterns, queues, and RESTful API design</span></div>
+    <div class="line">&nbsp;&nbsp;<span class="com">// Delivered production platforms for clients in Pakistan, UK &amp; Australia</span></div>
+    <div class="line">&nbsp;&nbsp;<span class="kw">public function</span> <span class="fn">passion</span>() {</div>
+    <div class="line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> <span class="str">'Clean architecture, RBAC-driven systems, and scalable backends.'</span>;</div>
+    <div class="line">&nbsp;&nbsp;}</div>
+    <div class="line">}</div>
+  </div>
+</section>
 
-  <section id="experience">
-    <div class="section-head reveal">
-      <div class="section-tag">// 02 Lab Notebook</div>
-      <h2>Where the experience comes from</h2>
-    </div>
-    <div class="notebook reveal">
-      <div class="entry">
-        <div class="date">JAN 2024 — MAY 2026</div>
-        <h3>Supplemental Instruction Leader</h3>
-        <div class="place">McMurry University · Abilene, TX · Part-time</div>
-        <p>Planned and led SI sessions in General and Organic Chemistry for students across majors and class levels, plus office hours for homework and exam prep.</p>
-      </div>
-      <div class="entry">
-        <div class="date">AUG 2023 — MAY 2026</div>
-        <h3>Chemistry &amp; Mathematics Tutor</h3>
-        <div class="place">McMurry University · Part-time</div>
-        <p>Helped students hit their academic goals through homework support, lab prep, and exam review — one-on-one and in small groups.</p>
-      </div>
-      <div class="entry">
-        <div class="date">JUN 2024 — AUG 2024</div>
-        <h3>Undergraduate Researcher</h3>
-        <div class="place">McMurry University · Internship</div>
-        <p>Ran organic and inorganic synthesis experiments using FTIR, GCMS, NMR, and UV-Vis instrumentation. Presented findings at the internship's closing showcase.</p>
-      </div>
-      <div class="entry">
-        <div class="date">AUG 2023 — DEC 2023</div>
-        <h3>Nursing Chemistry Laboratory Assistant</h3>
-        <div class="place">McMurry University · Part-time</div>
-        <p>Prepared weekly nursing chemistry labs — apparatus setup, reagent prep, and safe waste disposal — and graded exams and lab notebooks.</p>
-      </div>
-    </div>
-  </section>
+<section id="skills">
+  <span class="section-tag">cat composer.json</span>
+  <h2>Skills &amp; Stack</h2>
+  <div class="skills-wrap">
+    <div class="skill-card"><h4>PHP <span class="ver">^8</span></h4><div class="bar"><div class="bar-fill" style="width:92%"></div></div></div>
+    <div class="skill-card"><h4>Laravel <span class="ver">^10</span></h4><div class="bar"><div class="bar-fill" style="width:92%"></div></div></div>
+    <div class="skill-card"><h4>React <span class="ver">^18</span></h4><div class="bar"><div class="bar-fill" style="width:75%"></div></div></div>
+    <div class="skill-card"><h4>MySQL / PostgreSQL</h4><div class="bar"><div class="bar-fill" style="width:88%"></div></div></div>
+    <div class="skill-card"><h4>Redis</h4><div class="bar"><div class="bar-fill" style="width:80%"></div></div></div>
+    <div class="skill-card"><h4>Elasticsearch</h4><div class="bar"><div class="bar-fill" style="width:72%"></div></div></div>
+    <div class="skill-card"><h4>Tailwind CSS / Bootstrap 5</h4><div class="bar"><div class="bar-fill" style="width:85%"></div></div></div>
+    <div class="skill-card"><h4>REST APIs &amp; Design Patterns</h4><div class="bar"><div class="bar-fill" style="width:90%"></div></div></div>
+    <div class="skill-card"><h4>Queues &amp; Background Jobs</h4><div class="bar"><div class="bar-fill" style="width:85%"></div></div></div>
+  </div>
+</section>
 
-  <section id="services">
-    <div class="section-head reveal">
-      <div class="section-tag">// 03 Tutoring</div>
-      <h2>How I can help you</h2>
+<section id="experience">
+  <span class="section-tag">git log --oneline --graph</span>
+  <h2>Experience</h2>
+  <div class="git-log">
+    <div class="commit">
+      <div class="commit-head">
+        <span class="commit-hash">#a1b2c3</span>
+        <span class="commit-role">Full-Stack Developer @ Algo Genius Technologies Pvt. Ltd.</span>
+      </div>
+      <div class="commit-meta">Nov 2025 – Present</div>
+      <ul>
+        <li>Architected IFRAP, a multi-tenant SaaS platform with subscription onboarding, isolated org workspaces, and a dashboard builder with 5+ chart types for government &amp; enterprise clients.</li>
+        <li>Designed backend using Repository &amp; Service layer patterns, decoupling business logic from controllers for better testability.</li>
+        <li>Implemented Redis-driven Laravel queues for async data ingestion (ODK/CSV/API) and scheduled report generation.</li>
+        <li>Integrated Elasticsearch + Redis caching for low-latency dashboard search and filtering.</li>
+        <li>Engineered Python-based auto schema generation with a schema override UI for dynamic table/column management.</li>
+      </ul>
     </div>
-    <div class="services reveal">
-      <div class="service">
-        <div class="icon">1:1</div>
-        <h3>Private Tutoring</h3>
-        <p>General and Organic Chemistry, taught around how you actually learn — not just a recap of lecture slides.</p>
+    <div class="commit">
+      <div class="commit-head">
+        <span class="commit-hash">#d4e5f6</span>
+        <span class="commit-role">Full-Stack Developer @ CodiumSol</span>
       </div>
-      <div class="service">
-        <div class="icon">SI</div>
-        <h3>Exam &amp; Homework Prep</h3>
-        <p>Focused sessions before exams and problem sets, built from real SI-leader experience running review sessions.</p>
-      </div>
-      <div class="service">
-        <div class="icon">Lab</div>
-        <h3>Lab &amp; Report Support</h3>
-        <p>Help with lab prep, notebooks, and report write-ups — grounded in hands-on synthesis and instrumentation work.</p>
-      </div>
+      <div class="commit-meta">Nov 2024 – Oct 2025</div>
+      <ul>
+        <li>Built USR CRM (uniquesoundz.co.uk) — a wedding management CRM handling bookings, DJ assignments, invoicing, and automated reporting.</li>
+        <li>Used queued jobs for scheduled report delivery and automated email notifications.</li>
+        <li>Developed and customized 10+ web applications including e-commerce platforms, admin panels, and client dashboards.</li>
+        <li>Integrated third-party payment gateway and mapping service APIs.</li>
+      </ul>
     </div>
-  </section>
+    <div class="commit">
+      <div class="commit-head">
+        <span class="commit-hash">#g7h8i9</span>
+        <span class="commit-role">Laravel Developer @ Tricasol</span>
+      </div>
+      <div class="commit-meta">Apr 2024 – Oct 2024</div>
+      <ul>
+        <li>Developed Instant Car Rent (instantcarrent.com.au), a vehicle rental platform for the Australian market.</li>
+        <li>Led backend architecture, normalized a 5-table relational schema, and optimized performance and scalability.</li>
+        <li>Improved query performance via eager loading and caching on high-traffic booking pages.</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
-  <section id="skills">
-    <div class="section-head reveal">
-      <div class="section-tag">// 04 Reagents on Hand</div>
-      <h2>Skills &amp; tools</h2>
-    </div>
-    <div class="reagents reveal">
-      <span class="tag">Organic Synthesis</span>
-      <span class="tag">Inorganic Synthesis</span>
-      <span class="tag">Analytical Skills</span>
-      <span class="tag">Research Skills</span>
-      <span class="tag">Good Laboratory Practice</span>
-      <span class="tag">Standard Operating Procedure</span>
-      <span class="tag">Teaching</span>
-      <span class="tag">Academic Advising</span>
-      <span class="tag">Public Speaking</span>
-      <span class="tag">Goal Setting</span>
-      <span class="tag">Microsoft Excel</span>
-      <span class="tag">Microsoft Word</span>
-      <span class="tag">Microsoft PowerPoint</span>
-    </div>
-  </section>
-
-  <section id="contact">
-    <div class="contact reveal">
-      <div>
-        <h2>Struggling with Chemistry?</h2>
-        <p>Send me a message with what you're working on and your schedule — I'll get back to you within a day to set up your first session.</p>
-      </div>
-      <div class="contact-actions">
-        <a class="btn btn-primary" href="mailto:yumel.calaunan@example.com">Email me</a>
-        <a class="btn btn-ghost" style="border-color:#F4F6EF; color:#F4F6EF;" href="https://www.linkedin.com/in/yumel-calaunan/" target="_blank" rel="noopener">View LinkedIn</a>
+<section id="projects">
+  <span class="section-tag">ls -la projects/</span>
+  <h2>Projects</h2>
+  <div class="project-grid">
+    <div class="project-card">
+      <div class="project-top-bar" style="background:var(--laravel)"></div>
+      <div class="project-card-body">
+        <div class="project-card-header">
+          <span class="project-title">IFRAP</span>
+          <span class="project-badge">Enterprise SaaS</span>
+        </div>
+        <div class="project-client">Algo Genius Technologies · 2026 – Present</div>
+        <p class="project-desc">Multi-tenant SaaS platform for government &amp; enterprise clients — subscription onboarding, isolated org workspaces, ODK/CSV/API data ingestion, Python-based auto schema generation with a schema override UI, and a dashboard builder with 5+ chart types.</p>
+        <div class="project-tech">
+          <span class="tech-pill">Laravel</span>
+          <span class="tech-pill">Redis Queues</span>
+          <span class="tech-pill">Elasticsearch</span>
+          <span class="tech-pill">Python</span>
+        </div>
+        <span class="project-link disabled">Private client platform</span>
       </div>
     </div>
-  </section>
+    <div class="project-card">
+      <div class="project-top-bar" style="background:var(--laravel)"></div>
+      <div class="project-card-body">
+        <div class="project-card-header">
+          <span class="project-title">WCKP Monitoring System</span>
+          <span class="project-badge">Government</span>
+        </div>
+        <div class="project-client">Algo Genius Technologies · 2025</div>
+        <p class="project-desc">Real-time government monitoring &amp; admin panel with live data tracking, multi-role access control (RBAC), and compliance reporting for field operations.</p>
+        <div class="project-tech">
+          <span class="tech-pill">Laravel</span>
+          <span class="tech-pill">RBAC</span>
+          <span class="tech-pill">Admin Panel</span>
+        </div>
+        <a href="https://wckp.edlogs.com/" target="_blank" rel="noopener" class="project-link">Visit wckp.edlogs.com →</a>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-top-bar" style="background:var(--cyan)"></div>
+      <div class="project-card-body">
+        <div class="project-card-header">
+          <span class="project-title">NWMC Monitoring System</span>
+          <span class="project-badge">Government</span>
+        </div>
+        <div class="project-client">Algo Genius Technologies · 2025</div>
+        <p class="project-desc">Government monitoring &amp; admin panel handling real-time data tracking, multi-role access control, and compliance reporting across field teams.</p>
+        <div class="project-tech">
+          <span class="tech-pill">Laravel</span>
+          <span class="tech-pill">RBAC</span>
+          <span class="tech-pill">Admin Panel</span>
+        </div>
+        <a href="https://nwmc.edlogs.com/" target="_blank" rel="noopener" class="project-link">Visit nwmc.edlogs.com →</a>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-top-bar" style="background:var(--amber)"></div>
+      <div class="project-card-body">
+        <div class="project-card-header">
+          <span class="project-title">SPHF Monitoring System</span>
+          <span class="project-badge">Government</span>
+        </div>
+        <div class="project-client">Algo Genius Technologies · 2025</div>
+        <p class="project-desc">Real-time monitoring &amp; admin panel built for compliance tracking and reporting, with role-based access control across multiple field teams.</p>
+        <div class="project-tech">
+          <span class="tech-pill">Laravel</span>
+          <span class="tech-pill">RBAC</span>
+          <span class="tech-pill">Admin Panel</span>
+        </div>
+        <a href="https://sphf.edlogs.com/" target="_blank" rel="noopener" class="project-link">Visit sphf.edlogs.com →</a>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-top-bar" style="background:var(--cyan)"></div>
+      <div class="project-card-body">
+        <div class="project-card-header">
+          <span class="project-title">USR CRM</span>
+          <span class="project-badge">Client · UK</span>
+        </div>
+        <div class="project-client">CodiumSol · 2024 – 2025</div>
+        <p class="project-desc">Custom wedding management CRM built for uniquesoundz.co.uk — handles 100+ events/month with DJ bookings, scheduling, client records, invoice generation, and automated report delivery via queued jobs.</p>
+        <div class="project-tech">
+          <span class="tech-pill">Laravel</span>
+          <span class="tech-pill">Queued Jobs</span>
+          <span class="tech-pill">MySQL</span>
+        </div>
+        <a href="https://uniquesoundz.co.uk" target="_blank" rel="noopener" class="project-link">Visit uniquesoundz.co.uk →</a>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-top-bar" style="background:var(--amber)"></div>
+      <div class="project-card-body">
+        <div class="project-card-header">
+          <span class="project-title">Instant Car Rent</span>
+          <span class="project-badge">Client · Australia</span>
+        </div>
+        <div class="project-client">Tricasol · 2024</div>
+        <p class="project-desc">Vehicle rental platform for the Australian market with a streamlined booking process — normalized 5-table relational schema, real-time availability, dynamic pricing, and a revenue analytics dashboard.</p>
+        <div class="project-tech">
+          <span class="tech-pill">Laravel</span>
+          <span class="tech-pill">MySQL</span>
+          <span class="tech-pill">Eager Loading</span>
+        </div>
+        <a href="https://instantcarrent.com.au" target="_blank" rel="noopener" class="project-link">Visit instantcarrent.com.au →</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <footer>© 2026 Yumel Calaunan — Chemistry &amp; Math Tutoring, Los Angeles Metro Area</footer>
-</div>
+<section id="contact">
+  <span class="section-tag">php artisan tinker</span>
+  <h2>Get In Touch</h2>
+  <div class="contact-terminal">
+    <div class="term-bar">
+      <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
+      <div class="term-title">contact.php</div>
+    </div>
+    <div class="contact-body">
+      <div class="line" style="margin-bottom:18px; font-size:0.85rem; color:var(--muted);">
+        <span class="prompt">$</span> email: <a href="mailto:shoaibakhtar1938@gmail.com" style="color:var(--cyan)">shoaibakhtar1938@gmail.com</a><br>
+        <span class="prompt">$</span> phone: <a href="tel:+923080411919" style="color:var(--cyan)">+92-308-0411919</a><br>
+        <span class="prompt">$</span> linkedin: <a href="https://linkedin.com/in/shoaib-akhtar-software-engineer" target="_blank" rel="noopener" style="color:var(--cyan)">shoaib-akhtar-software-engineer</a><br>
+        <span class="prompt">$</span> location: Lahore, Pakistan
+      </div>
+      <form onsubmit="event.preventDefault(); alert('Form UI ready — connect this to Formspree, EmailJS, or your backend to receive messages.');">
+        <div class="field">
+          <label>name</label>
+          <input type="text" placeholder="Your name" required>
+        </div>
+        <div class="field">
+          <label>email</label>
+          <input type="email" placeholder="you@example.com" required>
+        </div>
+        <div class="field">
+          <label>message</label>
+          <textarea placeholder="Tell me about your project..." required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">$ send_message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Shoaib Akhtar — Full Stack Laravel Developer. All rights reserved.
+</footer>
 
 <script>
-  // ambient bubbles
-  const bubbleWrap = document.getElementById('bubbles');
-  const bubbleCount = window.innerWidth < 700 ? 8 : 14;
-  for(let i=0;i<bubbleCount;i++){
-    const b = document.createElement('div');
-    b.className = 'bubble';
-    const size = 6 + Math.random()*22;
-    b.style.width = size+'px';
-    b.style.height = size+'px';
-    b.style.left = Math.random()*100+'%';
-    b.style.animationDuration = (10 + Math.random()*14)+'s';
-    b.style.animationDelay = (Math.random()*14)+'s';
-    bubbleWrap.appendChild(b);
-  }
+  const roles = ["SaaS Platforms.", "REST APIs.", "CRM Systems.", "Dashboard Builders."];
+  const el = document.getElementById('typed-role');
+  let ri = 0, ci = 0, deleting = false;
 
-  // scroll reveal
-  const revealEls = document.querySelectorAll('.reveal');
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
-    });
-  }, {threshold:0.15});
-  revealEls.forEach(el=>io.observe(el));
+  function tick(){
+    const current = roles[ri];
+    if(!deleting){
+      el.textContent = current.slice(0, ci+1);
+      ci++;
+      if(ci === current.length){ deleting = true; setTimeout(tick, 1400); return; }
+    } else {
+      el.textContent = current.slice(0, ci-1);
+      ci--;
+      if(ci === 0){ deleting = false; ri = (ri+1) % roles.length; }
+    }
+    setTimeout(tick, deleting ? 45 : 85);
+  }
+  tick();
 </script>
 
 </body>
